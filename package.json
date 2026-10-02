@@ -1,0 +1,14 @@
+{
+  "name": "event-checkin",
+  "version": "1.0.0",
+  "description": "Simple single-page attendee check-in app for PrincipiumX.",
+  "private": true,
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.13"
+  },
+  "scripts": {
+    "start": "node --disable-warning=ExperimentalWarning server.js",
+    "test": "node --disable-warning=ExperimentalWarning --test test/*.test.js"
+  }
+}

@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>PrincipiumX Check-in</title>
+  <meta name="description" content="Attendee check-in for PrincipiumX: The First Principles Way to Find the Next 10X Opportunity Hiding in Your Product.">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%234f46e5'/%3E%3Cpath d='M9 16.5l4.5 4.5L23 11.5' stroke='white' stroke-width='3' fill='none' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <p class="eyebrow">Event Check-in</p>
+      <h1>PrincipiumX: The First Principles Way to Find the Next 10X Opportunity Hiding in Your Product.</h1>
+      <p class="subtitle">Check in form</p>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <!-- Attendee view -->
+    <section id="attendee-view">
+      <div class="card">
+        <label for="search" class="label">Find your name</label>
+        <div class="search-box">
+          <svg aria-hidden="true" viewBox="0 0 24 24" width="20" height="20"><circle cx="11" cy="11" r="7" fill="none" stroke="currentColor" stroke-width="2"/><path d="M20 20l-3.5-3.5" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+          <input id="search" type="search" placeholder="Start typing your first or last name…" autocomplete="off" autocapitalize="words" spellcheck="false">
+        </div>
+        <p id="search-hint" class="hint">Type at least 2 letters.</p>
+        <ul id="results" class="results" aria-live="polite"></ul>
+      </div>
+    </section>
+
+    <!-- Host view -->
+    <section id="host-view" hidden>
+      <div id="login-card" class="card narrow">
+        <h2>Host sign in</h2>
+        <form id="login-form" class="stack">
+          <label class="label" for="password">Host password</label>
+          <input id="password" type="password" autocomplete="current-password" required>
+          <button class="btn primary" type="submit">Sign in</button>
+          <p id="login-error" class="error" hidden></p>
+        </form>
+      </div>
+
+      <div id="host-panel" hidden>
+        <div class="stats">
+          <div class="stat"><span id="stat-total">0</span><small>Registered</small></div>
+          <div class="stat"><span id="stat-checked">0</span><small>Checked in</small></div>
+          <div class="stat"><span id="stat-pending">0</span><small>Not yet</small></div>
+        </div>
+
+        <div class="grid">
+          <div class="card">
+            <h2>Upload attendee list</h2>
+            <p class="hint">CSV file with columns <b>First Name, Last Name, Company</b>. A header row is optional. Save Excel sheets as CSV first.</p>
+            <form id="upload-form" class="stack">
+              <input id="file" type="file" accept=".csv,.txt,text/csv" required>
+              <button class="btn primary" type="submit">Upload list</button>
+              <p id="upload-msg" class="msg" hidden></p>
+            </form>
+          </div>
+
+          <div class="card">
+            <h2>Add attendee manually</h2>
+            <form id="add-form" class="stack">
+              <div class="row">
+                <input name="firstName" placeholder="First name" required>
+                <input name="lastName" placeholder="Last name">
+              </div>
+              <input name="company" placeholder="Company name">
+              <button class="btn primary" type="submit">Add attendee</button>
+              <p id="add-msg" class="msg" hidden></p>
+            </form>
+          </div>
+
+          <div class="card qr-card">
+            <h2>Check-in QR code</h2>
+            <p class="hint">Print or display this so attendees can scan it.</p>
+            <div id="qr" class="qr"></div>
+            <p id="qr-url" class="qr-url"></p>
+            <button class="btn" id="print-qr" type="button">Print QR code</button>
+          </div>
+        </div>
+
+        <div class="card">
+          <div class="list-head">
+            <h2>Attendees</h2>
+            <div class="actions">
+              <input id="filter" type="search" placeholder="Filter…" autocomplete="off">
+              <select id="status-filter" aria-label="Status filter">
+                <option value="all">All</option>
+                <option value="in">Checked in</option>
+                <option value="out">Not checked in</option>
+              </select>
+              <button class="btn" id="refresh" type="button">Refresh</button>
+              <button class="btn" id="export" type="button">Export CSV</button>
+              <button class="btn danger" id="clear-all" type="button">Delete all</button>
+            </div>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead><tr><th>Name</th><th>Company</th><th>Status</th><th></th></tr></thead>
+              <tbody id="attendee-rows"></tbody>
+            </table>
+          </div>
+          <p id="empty-list" class="hint center" hidden>No attendees yet. Upload a list or add someone manually.</p>
+        </div>
+
+        <p class="center"><button class="link" id="logout" type="button">Sign out</button></p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="wrap footer">
+    <a id="mode-link" href="/admin">Host login</a>
+  </footer>
+
+  <script src="/app.js"></script>
+</body>
+</html>
